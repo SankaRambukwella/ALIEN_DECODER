@@ -2,125 +2,140 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👽 ALIEN DECODER · INSANE + LEXICON</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>👽 ALIEN DECODER · INSANE MOBILE</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* (Same cosmic style as before – keep it) */
+        /* ----- RESET & BASE ----- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: #0a0f0f;
             font-family: 'Orbitron', sans-serif;
             color: #b7fff0;
-            overflow-x: hidden;
             min-height: 100vh;
             position: relative;
+            overflow-x: hidden;
+            padding: 10px;
         }
+        /* cosmic dust (lighter on mobile) */
         body::before {
             content: "";
             position: fixed;
-            width: 200%;
-            height: 200%;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle at 20% 30%, #b5ffe0 1px, transparent 1px),
                         radial-gradient(circle at 80% 70%, #b0f0ff 1px, transparent 1px);
-            background-size: 80px 80px, 120px 120px;
+            background-size: 60px 60px, 100px 100px;
             animation: drift 90s linear infinite;
-            opacity: 0.15;
+            opacity: 0.1;
             pointer-events: none;
             z-index: 0;
         }
         @keyframes drift {
             0% { transform: translate(0,0) rotate(0deg); }
-            100% { transform: translate(-30%, -20%) rotate(3deg); }
+            100% { transform: translate(-20%, -15%) rotate(2deg); }
         }
+
+        /* UFOs – smaller and slower on mobile */
         .ufo {
             position: absolute;
-            top: 30px;
-            left: -200px;
-            font-size: 3.5rem;
-            filter: drop-shadow(0 0 8px #0ff);
-            animation: fly 24s linear infinite;
+            top: 10px;
+            left: -150px;
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 5px #0ff);
+            animation: fly 30s linear infinite;
             z-index: 5;
+            opacity: 0.5;
         }
         .ufo2 {
             position: absolute;
-            bottom: 100px;
-            left: -300px;
-            font-size: 2.8rem;
+            bottom: 50px;
+            left: -200px;
+            font-size: 2rem;
             filter: drop-shadow(0 0 5px #ffb3ff);
-            animation: fly 31s linear reverse infinite;
+            animation: fly 40s linear reverse infinite;
             z-index: 5;
+            opacity: 0.4;
         }
         @keyframes fly {
             0% { left: -200px; transform: scale(0.8); }
-            20% { transform: scale(1.2); }
-            50% { top: 15vh; transform: scale(1); }
-            100% { left: 120%; transform: scale(0.7); }
+            100% { left: 120%; transform: scale(1); }
         }
+
+        /* ----- MAIN CONTAINER (mobile first) ----- */
         .game-container {
             position: relative;
             z-index: 20;
-            max-width: 1100px;
-            margin: 30px auto;
-            background: rgba(8, 20, 18, 0.9);
+            max-width: 600px;
+            margin: 10px auto;
+            background: rgba(8, 20, 18, 0.95);
             backdrop-filter: blur(4px);
             border: 2px solid #1effd0;
-            border-radius: 32px;
-            padding: 30px;
-            box-shadow: 0 0 40px #1effd0, inset 0 0 20px #1a4d47;
-            display: grid;
-            grid-template-columns: 1.4fr 1fr;
-            gap: 20px;
+            border-radius: 28px;
+            padding: 18px;
+            box-shadow: 0 0 30px #1effd0, inset 0 0 10px #1a4d47;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
         }
+
+        /* both panels become blocks */
+        .mission-panel, .data-panel {
+            width: 100%;
+        }
+
         .mission-panel {
             background: #031010c9;
-            border-radius: 24px;
-            padding: 20px;
+            border-radius: 22px;
+            padding: 18px 15px;
             border: 1px solid #2affbf;
         }
+
         .glitch {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            margin: 20px 0;
+            letter-spacing: 2px;
+            margin: 15px 0;
             animation: glitch 2.2s infinite;
             word-break: break-word;
+            line-height: 1.3;
         }
         @keyframes glitch {
-            0% { text-shadow: 3px 0 #ff00c1, -2px 0 #00ffea; }
-            25% { text-shadow: -4px 0 #ff6600, 2px 0 cyan; }
-            50% { text-shadow: 2px 2px magenta, -2px -2px lime; }
-            75% { text-shadow: -3px 2px blue, 3px -2px red; }
-            100% { text-shadow: 2px 0 #00ffc3, -2px 0 #ff00e6; }
+            0% { text-shadow: 2px 0 #ff00c1, -1px 0 #00ffea; }
+            25% { text-shadow: -2px 0 #ff6600, 1px 0 cyan; }
+            50% { text-shadow: 1px 1px magenta, -1px -1px lime; }
+            75% { text-shadow: -2px 1px blue, 2px -1px red; }
+            100% { text-shadow: 1px 0 #00ffc3, -1px 0 #ff00e6; }
         }
+
+        /* answer buttons – big and tappable */
         .options-grid {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin: 25px 0;
+            margin: 20px 0;
         }
         .options-grid button {
             background: transparent;
             border: 2px solid #2affbf;
-            border-radius: 60px;
-            padding: 14px 20px;
+            border-radius: 50px;
+            padding: 16px 18px;
             font-family: 'Orbitron', sans-serif;
             color: #d5fffb;
             font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
             cursor: pointer;
             transition: 0.2s;
             text-align: left;
             position: relative;
+            min-height: 60px; /* touch friendly */
+            -webkit-tap-highlight-color: transparent;
         }
-        .options-grid button:hover:not(:disabled) {
+        .options-grid button:active {
             background: #1effd0;
             color: #031010;
-            border-color: #f0f;
-            box-shadow: 0 0 20px #f0f;
-            transform: scale(1.02);
+            transform: scale(0.98);
         }
         .correct {
             background: #00d4a0 !important;
@@ -129,7 +144,7 @@
         }
         .correct::after {
             content: " ✓";
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             position: absolute;
             right: 20px;
@@ -142,145 +157,177 @@
             border-color: #ff99cc !important;
             text-decoration: line-through wavy #fff;
         }
+
+        /* hint area */
         .hint-area {
             display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 12px;
             margin: 15px 0;
         }
         .hint-btn {
             background: #160f2b;
             border: 2px dashed #fe0;
-            border-radius: 40px;
-            padding: 12px 28px;
+            border-radius: 50px;
+            padding: 16px;
             font-weight: bold;
             color: #fffdab;
             font-size: 1.2rem;
             cursor: pointer;
             transition: 0.2s;
-            flex: 1;
+            width: 100%;
+            min-height: 60px;
         }
-        .hint-btn:hover:not(:disabled) {
+        .hint-btn:active {
             background: #fffd9f;
             color: black;
-            border-color: magenta;
-            box-shadow: 0 0 30px yellow;
+        }
+        #hintCount {
+            background: #000;
+            padding: 12px;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 1.2rem;
+            border: 1px solid #fe0;
         }
         #hintBox {
             background: #0f2b28;
-            border-radius: 24px;
-            padding: 15px 20px;
-            font-size: 1.2rem;
-            border-left: 10px solid #fe0;
-            margin: 10px 0;
+            border-radius: 30px;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-left: 8px solid #fe0;
+            margin: 8px 0;
             color: #fffbbc;
+            min-height: 60px;
             transition: opacity 0.3s;
+            word-break: break-word;
         }
+
         .stats {
             display: flex;
             justify-content: space-between;
-            font-size: 1.3rem;
-            margin-top: 25px;
+            font-size: 1.1rem;
+            margin-top: 20px;
             border-top: 2px solid #0ff;
             padding-top: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
+
+        /* data panel (lexicon + leaderboard) */
         .data-panel {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
         }
         .lexicon-panel, .leaderboard-panel {
             background: #0b1d1a;
             border: 2px solid #bcfffd;
-            border-radius: 28px;
-            padding: 20px 15px;
+            border-radius: 24px;
+            padding: 18px 12px;
         }
         .lexicon-panel h2, .leaderboard-panel h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #fbffa3;
             border-bottom: 2px solid #78ffe0;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         #lexiconList {
-            max-height: 220px;
+            max-height: 200px;
             overflow-y: auto;
-            font-size: 1.0rem;
+            font-size: 0.9rem;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
         .lex-item {
             background: #17302b;
-            border-radius: 40px;
-            padding: 8px 15px;
+            border-radius: 30px;
+            padding: 8px 12px;
             border: 1px solid #0ff;
             display: flex;
             justify-content: space-between;
         }
         .lex-alien { font-weight: bold; color: #ffbc6e; }
-        .lex-human { color: #b3ffe0; font-style: italic; }
+        .lex-human { color: #b3ffe0; }
+
         #leaderboardList {
             list-style: none;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         #leaderboardList li {
-            padding: 6px 10px;
+            padding: 8px 5px;
             border-bottom: 1px solid #49c6b3;
             display: flex;
             justify-content: space-between;
         }
         #leaderboardList li::before {
             content: "👾";
-            margin-right: 10px;
+            margin-right: 8px;
         }
+
         .reset-btn {
             background: transparent;
             border: 2px solid #ff4de1;
             color: #ffb3fd;
-            border-radius: 40px;
-            padding: 8px 15px;
+            border-radius: 50px;
+            padding: 14px;
             margin-top: 15px;
             width: 100%;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1.1rem;
+            min-height: 54px;
         }
-        .reset-btn:hover {
+        .reset-btn:active {
             background: #ff6ef0;
             color: black;
         }
+
         .alien-win {
-            font-size: 2.5rem;
+            font-size: 2rem;
             text-align: center;
             color: #f0f;
-            text-shadow: 0 0 30px cyan;
+            text-shadow: 0 0 20px cyan;
             animation: glitch 1s infinite;
-            margin: 30px 0;
+            margin: 20px 0;
         }
         .correct-message {
             background: #0f0;
             color: black;
             font-weight: bold;
-            padding: 8px;
+            padding: 10px;
             border-radius: 50px;
             margin: 5px 0;
             text-align: center;
         }
+
+        /* small screen adjustments */
+        @media (max-width: 480px) {
+            .game-container { padding: 12px; }
+            .glitch { font-size: 1.3rem; }
+            .options-grid button { font-size: 0.9rem; padding: 14px; }
+            .hint-btn { font-size: 1rem; }
+            #hintBox { font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
-<div class="ufo">🛸👽🛸</div>
-<div class="ufo2">🛸🔦👾</div>
+<div class="ufo">🛸</div>
+<div class="ufo2">👽</div>
 
 <div class="game-container" id="mainGameContainer">
     <div class="mission-panel" id="missionPanel">
-        <h1 style="font-size: 2rem;">◤ ALIEN DECODER ◢</h1>
+        <h1 style="font-size: 1.8rem;">◤ ALIEN DECODER ◢</h1>
         <div id="alienText" class="glitch">...</div>
         <div id="options" class="options-grid"></div>
         <div class="hint-area">
             <button class="hint-btn" id="hintButton" onclick="useHint()">💡 DECODE HINT</button>
-            <span style="background:#000; padding:10px; border-radius:50px;" id="hintCount">🧪 2</span>
+            <span id="hintCount">🧪 2</span>
         </div>
         <div id="hintBox">👽— press hint to decrypt —</div>
         <div class="stats">
@@ -298,7 +345,7 @@
         <div class="leaderboard-panel">
             <h2>🏆 COSMIC LEADERBOARD</h2>
             <ol id="leaderboardList">loading from galaxy...</ol>
-            <div style="font-size:0.8rem;">top 10 · GAS sync (JSONP)</div>
+            <div style="font-size:0.7rem; margin-top:8px;">top 10 · GAS sync</div>
         </div>
     </div>
 </div>
@@ -310,7 +357,6 @@
     // ================= CONFIG =================
     const GAS_URL = "https://script.google.com/macros/s/AKfycbwLdsXN40Bzf68l2eloIiZs3Vk_OwQERJdqMbsGVm0uGz4N-3jfKmlZD9tFlTEOUfTSvQ/exec";  // <-- REPLACE WITH YOUR GAS URL
 
-    // Expanded lexicon and more complex sentences (16 total)
     const lexiconDB = {
         "Zyra'k": "we", "tul": "come", "venar": "peace",
         "Kora": "ship", "xyn": "has/have", "talor": "landed",
@@ -344,7 +390,7 @@
 
     // ---------- Game state ----------
     let score = 0;
-    let hintsLeft = 2;                 // only 2 hints – more difficult
+    let hintsLeft = 2;
     let usedIndexes = JSON.parse(localStorage.getItem("usedQuestions")) || [];
     let currentQuestionIndex = null;
     let discoveredWords = JSON.parse(localStorage.getItem("alienLexicon")) || {};
@@ -385,7 +431,6 @@
 
     // ---------- Leaderboard (CORS‑proof) ----------
     function fetchLeaderboard() {
-        // Use JSONP to bypass CORS
         const script = document.createElement('script');
         const callbackName = 'jsonp_callback_' + Date.now();
         window[callbackName] = function(data) {
@@ -406,18 +451,16 @@
     }
 
     async function submitScore(playerName, finalScore) {
-        // Use no-cors mode – request will be sent, but we can't read response
         try {
             await fetch(GAS_URL, {
                 method: 'POST',
-                mode: 'no-cors',           // bypass CORS
+                mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: playerName, score: finalScore })
             });
-            // Still try to refresh leaderboard after a short delay
             setTimeout(fetchLeaderboard, 2000);
         } catch (e) {
-            console.warn('Score submission failed (no-cors used, might still work)');
+            console.warn('Score submission failed');
         }
     }
 
@@ -434,8 +477,8 @@
         const panel = document.getElementById('missionPanel');
         panel.innerHTML = `
             <div class="alien-win">👾◤ VICTORY ◢👾</div>
-            <div style="font-size:2rem; text-align:center;">FINAL SCORE: ${score}</div>
-            <div style="margin:30px 0; font-size:1.4rem; color:#ff0;">“Zyra'k tul venar” — you are peace</div>
+            <div style="font-size:1.8rem; text-align:center;">FINAL SCORE: ${score}</div>
+            <div style="margin:20px 0; font-size:1.2rem; color:#ff0;">“Zyra'k tul venar” — you are peace</div>
             <button class="reset-btn" onclick="resetGame()">⟲ PLAY AGAIN ⟲</button>
         `;
     }
@@ -469,7 +512,6 @@
         const q = questions[currentQuestionIndex];
         document.getElementById("alienText").innerText = q.alien;
 
-        // Generate 5 options (1 correct, 4 random) – harder
         let otherAnswers = questions.map(q => q.answer).filter(a => a !== q.answer);
         otherAnswers = shuffle(otherAnswers).slice(0, 4);
         let options = [q.answer, ...otherAnswers];
@@ -497,11 +539,10 @@
             score++;
             document.getElementById("correctSound").play();
             learnCurrentSentence();
-            // Show a floating correct sign (optional)
             const msg = document.createElement("div");
             msg.className = "correct-message";
             msg.innerText = "✔ CORRECT!";
-            document.getElementById("hintBox").innerHTML = ""; // clear hint
+            document.getElementById("hintBox").innerHTML = "";
             document.getElementById("hintBox").appendChild(msg);
             setTimeout(() => {
                 if (document.getElementById("hintBox").contains(msg))
@@ -547,7 +588,6 @@
         document.getElementById("hintCount").innerText = `🧪 ${hintsLeft}`;
         if (hintsLeft === 0) document.getElementById("hintButton").disabled = true;
 
-        // Hint disappears after 5 seconds
         setTimeout(() => {
             document.getElementById("hintBox").innerHTML = "👽— press hint to decrypt —";
         }, 5000);
@@ -562,12 +602,12 @@
         hintsLeft = 2;
         currentQuestionIndex = null;
         document.getElementById('missionPanel').innerHTML = `
-            <h1 style="font-size: 2rem;">◤ ALIEN DECODER ◢</h1>
+            <h1 style="font-size: 1.8rem;">◤ ALIEN DECODER ◢</h1>
             <div id="alienText" class="glitch">...</div>
             <div id="options" class="options-grid"></div>
             <div class="hint-area">
                 <button class="hint-btn" id="hintButton" onclick="useHint()">💡 DECODE HINT</button>
-                <span style="background:#000; padding:10px; border-radius:50px;" id="hintCount">🧪 2</span>
+                <span id="hintCount">🧪 2</span>
             </div>
             <div id="hintBox">👽— press hint to decrypt —</div>
             <div class="stats">
@@ -589,7 +629,7 @@
     } else {
         getRandomQuestion();
     }
-    setInterval(fetchLeaderboard, 30000); // refresh leaderboard every 30s
+    setInterval(fetchLeaderboard, 30000);
 </script>
 </body>
 </html>
