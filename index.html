@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>👽 ALIEN DECODER · INSANE MOBILE</title>
+    <title>👽 ALIEN DECODER · CHAT UNLOCK</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* ----- RESET & BASE ----- */
+        /* ----- RESET & BASE (same insane mobile style) ----- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: #0a0f0f;
@@ -17,7 +17,6 @@
             overflow-x: hidden;
             padding: 10px;
         }
-        /* cosmic dust (lighter on mobile) */
         body::before {
             content: "";
             position: fixed;
@@ -34,8 +33,6 @@
             0% { transform: translate(0,0) rotate(0deg); }
             100% { transform: translate(-20%, -15%) rotate(2deg); }
         }
-
-        /* UFOs – smaller and slower on mobile */
         .ufo {
             position: absolute;
             top: 10px;
@@ -60,8 +57,6 @@
             0% { left: -200px; transform: scale(0.8); }
             100% { left: 120%; transform: scale(1); }
         }
-
-        /* ----- MAIN CONTAINER (mobile first) ----- */
         .game-container {
             position: relative;
             z-index: 20;
@@ -77,19 +72,15 @@
             flex-direction: column;
             gap: 18px;
         }
-
-        /* both panels become blocks */
         .mission-panel, .data-panel {
             width: 100%;
         }
-
         .mission-panel {
             background: #031010c9;
             border-radius: 22px;
             padding: 18px 15px;
             border: 1px solid #2affbf;
         }
-
         .glitch {
             font-size: 1.5rem;
             font-weight: 900;
@@ -107,8 +98,6 @@
             75% { text-shadow: -2px 1px blue, 2px -1px red; }
             100% { text-shadow: 1px 0 #00ffc3, -1px 0 #ff00e6; }
         }
-
-        /* answer buttons – big and tappable */
         .options-grid {
             display: flex;
             flex-direction: column;
@@ -129,7 +118,7 @@
             transition: 0.2s;
             text-align: left;
             position: relative;
-            min-height: 60px; /* touch friendly */
+            min-height: 60px;
             -webkit-tap-highlight-color: transparent;
         }
         .options-grid button:active {
@@ -157,8 +146,6 @@
             border-color: #ff99cc !important;
             text-decoration: line-through wavy #fff;
         }
-
-        /* hint area */
         .hint-area {
             display: flex;
             flex-direction: column;
@@ -182,6 +169,11 @@
             background: #fffd9f;
             color: black;
         }
+        .hint-btn:disabled {
+            opacity: 0.4;
+            filter: grayscale(0.8);
+            pointer-events: none;
+        }
         #hintCount {
             background: #000;
             padding: 12px;
@@ -202,7 +194,6 @@
             transition: opacity 0.3s;
             word-break: break-word;
         }
-
         .stats {
             display: flex;
             justify-content: space-between;
@@ -213,20 +204,18 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-
-        /* data panel (lexicon + leaderboard) */
         .data-panel {
             display: flex;
             flex-direction: column;
             gap: 18px;
         }
-        .lexicon-panel, .leaderboard-panel {
+        .lexicon-panel, .leaderboard-panel, .chat-panel {
             background: #0b1d1a;
             border: 2px solid #bcfffd;
             border-radius: 24px;
             padding: 18px 12px;
         }
-        .lexicon-panel h2, .leaderboard-panel h2 {
+        .lexicon-panel h2, .leaderboard-panel h2, .chat-panel h2 {
             font-size: 1.3rem;
             color: #fbffa3;
             border-bottom: 2px solid #78ffe0;
@@ -254,7 +243,6 @@
         }
         .lex-alien { font-weight: bold; color: #ffbc6e; }
         .lex-human { color: #b3ffe0; }
-
         #leaderboardList {
             list-style: none;
             font-size: 1rem;
@@ -269,7 +257,6 @@
             content: "👾";
             margin-right: 8px;
         }
-
         .reset-btn {
             background: transparent;
             border: 2px solid #ff4de1;
@@ -287,7 +274,6 @@
             background: #ff6ef0;
             color: black;
         }
-
         .alien-win {
             font-size: 2rem;
             text-align: center;
@@ -305,14 +291,79 @@
             margin: 5px 0;
             text-align: center;
         }
-
-        /* small screen adjustments */
+        /* Chat panel specific */
+        .chat-panel input, .chat-panel button {
+            font-family: 'Orbitron', sans-serif;
+        }
+        #chatMessages {
+            background: #0f2b28;
+            border-radius: 20px;
+            padding: 12px;
+            height: 160px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            border: 1px solid #0ff;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .chat-message {
+            padding: 6px 12px;
+            border-radius: 30px;
+            max-width: 80%;
+            word-break: break-word;
+        }
+        .chat-message.user {
+            background: #1d4a47;
+            align-self: flex-end;
+            color: #e0ffe0;
+            border: 1px solid #0ff;
+        }
+        .chat-message.alien {
+            background: #2a1f3a;
+            align-self: flex-start;
+            color: #ffde9e;
+            border: 1px solid #fe0;
+        }
+        #chatLock p {
+            margin-bottom: 10px;
+            color: #fffdab;
+        }
+        #chatPassword {
+            width: 100%;
+            padding: 14px;
+            border-radius: 50px;
+            background: #000;
+            color: #0ff;
+            border: 2px solid #fe0;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        #unlockChatBtn {
+            background: #160f2b;
+            border: 2px solid #fe0;
+        }
+        #chatError {
+            color: #ff7b9c;
+            min-height: 24px;
+            margin-top: 8px;
+        }
+        #completionBanner {
+            background: #ffd966;
+            color: #000;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+            text-align: center;
+            border: 2px solid #f0f;
+            word-break: break-word;
+        }
         @media (max-width: 480px) {
             .game-container { padding: 12px; }
             .glitch { font-size: 1.3rem; }
             .options-grid button { font-size: 0.9rem; padding: 14px; }
-            .hint-btn { font-size: 1rem; }
-            #hintBox { font-size: 1rem; }
         }
     </style>
 </head>
@@ -347,6 +398,25 @@
             <ol id="leaderboardList">loading from galaxy...</ol>
             <div style="font-size:0.7rem; margin-top:8px;">top 10 · GAS sync</div>
         </div>
+        <!-- NEW: ALIEN CHAT PANEL (always visible but locked) -->
+        <div class="chat-panel" id="chatPanel">
+            <h2>👽 ALIEN CHAT</h2>
+            <div id="chatLock">
+                <p>🔒 Decode all 16 phrases correctly to receive one‑time password.</p>
+                <input type="text" id="chatPassword" placeholder="enter password" autocomplete="off">
+                <button class="hint-btn" id="unlockChatBtn">🚀 UNLOCK CHAT</button>
+                <div id="chatError"></div>
+            </div>
+            <div id="chatInterface" style="display: none;">
+                <div id="chatMessages">
+                    <div class="chat-message alien">👽 Zyra'k tul venar ... (alien awaits)</div>
+                </div>
+                <div style="display:flex; gap:8px;">
+                    <input type="text" id="chatInput" placeholder="type message..." style="flex:1; padding:14px; border-radius:50px; background:#000; color:#0ff; border:2px solid #0ff;">
+                    <button class="hint-btn" id="sendChatBtn" style="width:auto; padding:14px 20px;">➤</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -355,7 +425,7 @@
 
 <script>
     // ================= CONFIG =================
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbwLdsXN40Bzf68l2eloIiZs3Vk_OwQERJdqMbsGVm0uGz4N-3jfKmlZD9tFlTEOUfTSvQ/exec";  // <-- REPLACE WITH YOUR GAS URL
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbwLdsXN40Bzf68l2eloIiZs3Vk_OwQERJdqMbsGVm0uGz4N-3jfKmlZD9tFlTEOUfTSvQ/exec";  // (replace with your own if needed)
 
     const lexiconDB = {
         "Zyra'k": "we", "tul": "come", "venar": "peace",
@@ -395,6 +465,11 @@
     let currentQuestionIndex = null;
     let discoveredWords = JSON.parse(localStorage.getItem("alienLexicon")) || {};
 
+    // ---------- Chat state ----------
+    let chatPassword = localStorage.getItem("alienChatPassword") || null;
+    let chatUnlocked = localStorage.getItem("chatUnlocked") === "true";
+    let allCorrectCompleted = localStorage.getItem("allCorrectCompleted") === "true"; // flag for perfect finish
+
     // ---------- Helper functions ----------
     function saveLexicon() {
         localStorage.setItem("alienLexicon", JSON.stringify(discoveredWords));
@@ -429,7 +504,7 @@
         ).join('');
     }
 
-    // ---------- Leaderboard (CORS‑proof) ----------
+    // ---------- Leaderboard ----------
     function fetchLeaderboard() {
         const script = document.createElement('script');
         const callbackName = 'jsonp_callback_' + Date.now();
@@ -464,6 +539,71 @@
         }
     }
 
+    // ---------- Chat functions ----------
+    function generateChatPassword() {
+        return "ALIEN-" + Math.random().toString(36).substring(2,8).toUpperCase();
+    }
+
+    function showChatPasswordMessage() {
+        const chatLockDiv = document.getElementById('chatLock');
+        // inject password hint into chat panel
+        let msgDiv = document.getElementById('chatPasswordHint');
+        if (!msgDiv) {
+            msgDiv = document.createElement('p');
+            msgDiv.id = 'chatPasswordHint';
+            msgDiv.style.background = '#ffd966';
+            msgDiv.style.color = '#000';
+            msgDiv.style.padding = '12px';
+            msgDiv.style.borderRadius = '50px';
+            msgDiv.style.marginBottom = '15px';
+            msgDiv.style.border = '2px solid #f0f';
+            chatLockDiv.insertBefore(msgDiv, chatLockDiv.firstChild);
+        }
+        msgDiv.innerHTML = `🔑 ONE‑TIME PASSWORD: <strong>${chatPassword}</strong> (use below)`;
+    }
+
+    function unlockChat(entered) {
+        if (entered === chatPassword) {
+            chatUnlocked = true;
+            localStorage.setItem("chatUnlocked", "true");
+            document.getElementById('chatLock').style.display = 'none';
+            document.getElementById('chatInterface').style.display = 'block';
+            // add welcome message
+            const msgBox = document.getElementById('chatMessages');
+            msgBox.innerHTML = '<div class="chat-message alien">👽 Zyra\'k tul venar. You may speak.</div>';
+        } else {
+            document.getElementById('chatError').innerText = '❌ invalid password';
+        }
+    }
+
+    // simple chat
+    function sendChat() {
+        const input = document.getElementById('chatInput');
+        const txt = input.value.trim();
+        if (!txt) return;
+        const msgBox = document.getElementById('chatMessages');
+        // user message
+        const userDiv = document.createElement('div');
+        userDiv.className = 'chat-message user';
+        userDiv.innerText = txt;
+        msgBox.appendChild(userDiv);
+        input.value = '';
+
+        // alien response (random from lexicon or funny)
+        setTimeout(() => {
+            const alienDiv = document.createElement('div');
+            alienDiv.className = 'chat-message alien';
+            const responses = [
+                "Zyra'k tul ...", "Kora xyn talor?", "Xenar vol ti'ra", "Nefar kros?",
+                "Venak zil.", "Lyss bor mek.", "👽👽👽", "quantum morph"
+            ];
+            alienDiv.innerText = "👽 " + responses[Math.floor(Math.random() * responses.length)];
+            msgBox.appendChild(alienDiv);
+            msgBox.scrollTop = msgBox.scrollHeight;
+        }, 600);
+        msgBox.scrollTop = msgBox.scrollHeight;
+    }
+
     // ---------- Game mechanics ----------
     function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
 
@@ -473,20 +613,53 @@
         return left;
     }
 
-    function showAlienWinMessage() {
-        const panel = document.getElementById('missionPanel');
-        panel.innerHTML = `
-            <div class="alien-win">👾◤ VICTORY ◢👾</div>
-            <div style="font-size:1.8rem; text-align:center;">FINAL SCORE: ${score}</div>
-            <div style="margin:20px 0; font-size:1.2rem; color:#ff0;">“Zyra'k tul venar” — you are peace</div>
-            <button class="reset-btn" onclick="resetGame()">⟲ PLAY AGAIN ⟲</button>
-        `;
-    }
-
+    // modified gameComplete: no full overwrite, just banner + disable + chat if perfect
     function gameComplete() {
+        // submit score to leaderboard
         const playerName = prompt("👾 MISSION COMPLETE! Enter your name for the leaderboard:", "Explorer");
         submitScore(playerName ? playerName.trim() || "Anonymous" : "Anonymous", score);
-        showAlienWinMessage();
+
+        // disable all interactive elements
+        document.querySelectorAll("#options button, #hintButton").forEach(el => el.disabled = true);
+
+        // Check if all answers correct
+        if (score === questions.length) {
+            allCorrectCompleted = true;
+            localStorage.setItem("allCorrectCompleted", "true");
+
+            // generate password if not exists
+            if (!chatPassword) {
+                chatPassword = generateChatPassword();
+                localStorage.setItem("alienChatPassword", chatPassword);
+            }
+
+            // show banner in mission panel
+            let banner = document.getElementById('completionBanner');
+            if (!banner) {
+                banner = document.createElement('div');
+                banner.id = 'completionBanner';
+                document.getElementById('missionPanel').insertBefore(banner, document.getElementById('missionPanel').firstChild);
+            }
+            banner.innerHTML = `🎉 PERFECT DECODE! ONE‑TIME PASSWORD: <strong>${chatPassword}</strong> 🎉`;
+
+            // show password hint in chat lock
+            showChatPasswordMessage();
+
+            // if already unlocked via storage, show chat
+            if (chatUnlocked) {
+                document.getElementById('chatLock').style.display = 'none';
+                document.getElementById('chatInterface').style.display = 'block';
+            }
+        } else {
+            // normal completion without perfect score
+            let banner = document.getElementById('completionBanner');
+            if (!banner) {
+                banner = document.createElement('div');
+                banner.id = 'completionBanner';
+                document.getElementById('missionPanel').insertBefore(banner, document.getElementById('missionPanel').firstChild);
+            }
+            banner.innerHTML = `👾 MISSION OVER · FINAL SCORE: ${score}/${questions.length}`;
+        }
     }
 
     function getRandomQuestion() {
@@ -596,11 +769,19 @@
     function resetGame() {
         localStorage.removeItem("usedQuestions");
         localStorage.removeItem("alienLexicon");
+        localStorage.removeItem("alienChatPassword");
+        localStorage.removeItem("chatUnlocked");
+        localStorage.removeItem("allCorrectCompleted");
         usedIndexes = [];
         discoveredWords = {};
         score = 0;
         hintsLeft = 2;
         currentQuestionIndex = null;
+        chatPassword = null;
+        chatUnlocked = false;
+        allCorrectCompleted = false;
+
+        // rebuild mission panel (simple way)
         document.getElementById('missionPanel').innerHTML = `
             <h1 style="font-size: 1.8rem;">◤ ALIEN DECODER ◢</h1>
             <div id="alienText" class="glitch">...</div>
@@ -616,20 +797,67 @@
             </div>
             <button class="reset-btn" onclick="resetGame()">⟲ RESTART MISSION ⟲</button>
         `;
+        // reset chat panel
+        document.getElementById('chatLock').style.display = 'block';
+        document.getElementById('chatInterface').style.display = 'none';
+        document.getElementById('chatPassword').value = '';
+        document.getElementById('chatError').innerText = '';
+        const hintMsg = document.getElementById('chatPasswordHint');
+        if (hintMsg) hintMsg.remove();
         renderLexicon();
         getRandomQuestion();
         updateLeftCount();
     }
 
     // ---------- Initialisation ----------
-    fetchLeaderboard();
-    renderLexicon();
-    if (usedIndexes.length >= questions.length) {
-        resetGame();
-    } else {
-        getRandomQuestion();
-    }
-    setInterval(fetchLeaderboard, 30000);
+    window.onload = function() {
+        fetchLeaderboard();
+        renderLexicon();
+
+        // chat unlock button
+        document.getElementById('unlockChatBtn').addEventListener('click', function() {
+            const pwd = document.getElementById('chatPassword').value.trim();
+            unlockChat(pwd);
+        });
+
+        // send chat button
+        document.getElementById('sendChatBtn').addEventListener('click', sendChat);
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendChat();
+        });
+
+        // check if already perfect completed
+        if (localStorage.getItem("allCorrectCompleted") === "true") {
+            allCorrectCompleted = true;
+            chatPassword = localStorage.getItem("alienChatPassword");
+            if (chatPassword) {
+                showChatPasswordMessage();
+            }
+            if (localStorage.getItem("chatUnlocked") === "true") {
+                chatUnlocked = true;
+                document.getElementById('chatLock').style.display = 'none';
+                document.getElementById('chatInterface').style.display = 'block';
+            }
+        }
+
+        // start or resume game
+        if (usedIndexes.length >= questions.length) {
+            // if already finished, just show final state without resetting
+            const left = questions.length - usedIndexes.length;
+            if (left <= 0) {
+                // need to rebuild mission panel properly? but we can just call gameComplete logic
+                // but we need to show score from storage? score is in memory only; we reload from storage? we have score variable =0 initially.
+                // Better to recover score from somewhere? We'll just reset if finished to avoid inconsistency.
+                resetGame();
+            } else {
+                getRandomQuestion();
+            }
+        } else {
+            getRandomQuestion();
+        }
+
+        setInterval(fetchLeaderboard, 30000);
+    };
 </script>
 </body>
 </html>
